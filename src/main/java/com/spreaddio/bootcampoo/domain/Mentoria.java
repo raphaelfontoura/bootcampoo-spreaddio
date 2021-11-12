@@ -2,34 +2,17 @@ package com.spreaddio.bootcampoo.domain;
 
 import java.time.LocalDate;
 
-public class Mentoria {
-  private String titulo;
-  private String descricao;
+public class Mentoria extends Conteudo{
+  
   private LocalDate data;
   
   public Mentoria() {
   }
 
   public Mentoria(String titulo, String descricao, LocalDate data) {
-    this.titulo = titulo;
-    this.descricao = descricao;
+    setTitulo(titulo);
+    setDescricao(descricao);
     this.data = data;
-  }
-
-  public String getTitulo() {
-    return titulo;
-  }
-
-  public void setTitulo(String titulo) {
-    this.titulo = titulo;
-  }
-
-  public String getDescricao() {
-    return descricao;
-  }
-
-  public void setDescricao(String descricao) {
-    this.descricao = descricao;
   }
 
   public LocalDate getData() {
@@ -44,7 +27,7 @@ public class Mentoria {
   public int hashCode() {
     final int prime = 31;
     int result = 1;
-    result = prime * result + ((titulo == null) ? 0 : titulo.hashCode());
+    result = prime * result + ((getTitulo() == null) ? 0 : getTitulo().hashCode());
     return result;
   }
 
@@ -57,17 +40,22 @@ public class Mentoria {
     if (getClass() != obj.getClass())
       return false;
     Mentoria other = (Mentoria) obj;
-    if (titulo == null) {
-      if (other.titulo != null)
+    if (getTitulo()== null) {
+      if (other.getTitulo() != null)
         return false;
-    } else if (!titulo.equals(other.titulo))
+    } else if (!getTitulo().equals(other.getTitulo()))
       return false;
     return true;
   }
 
   @Override
   public String toString() {
-    return "Mentoria [data=" + data + ", descricao=" + descricao + ", titulo=" + titulo + "]";
+    return "Mentoria [data=" + data + ", descricao=" + getDescricao()+ ", titulo=" + getTitulo()+ "]";
+  }
+
+  @Override
+  public double calcularXp() {
+    return XP_PADRAO + 20;
   }
   
 }

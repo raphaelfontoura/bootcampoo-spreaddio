@@ -1,30 +1,18 @@
 package com.spreaddio.bootcampoo.domain;
 
-public class Curso {
-  private String titulo;
-  private String descricao;
+public class Curso extends Conteudo{
+
   private int cargaHoraria;
 
   public Curso(){ }
 
   public Curso(String titulo, String descricao, int cargaHoraria) {
-    this.titulo = titulo;
-    this.descricao = descricao;
+    super();
+    setTitulo(titulo);
+    setDescricao(descricao);
     this.cargaHoraria = cargaHoraria;
   }
 
-  public String getTitulo() {
-    return titulo;
-  }
-  public void setTitulo(String titulo) {
-    this.titulo = titulo;
-  }
-  public String getDescricao() {
-    return descricao;
-  }
-  public void setDescricao(String descricao) {
-    this.descricao = descricao;
-  }
   public int getCargaHoraria() {
     return cargaHoraria;
   }
@@ -37,7 +25,7 @@ public class Curso {
     final int prime = 31;
     int result = 1;
     result = prime * result + cargaHoraria;
-    result = prime * result + ((titulo == null) ? 0 : titulo.hashCode());
+    result = prime * result + ((getTitulo() == null) ? 0 : getTitulo().hashCode());
     return result;
   }
 
@@ -52,17 +40,22 @@ public class Curso {
     Curso other = (Curso) obj;
     if (cargaHoraria != other.cargaHoraria)
       return false;
-    if (titulo == null) {
-      if (other.titulo != null)
+    if (getTitulo() == null) {
+      if (other.getTitulo() != null)
         return false;
-    } else if (!titulo.equals(other.titulo))
+    } else if (!getTitulo().equals(other.getTitulo()))
       return false;
     return true;
   }
 
   @Override
   public String toString() {
-    return "Curso [cargaHoraria=" + cargaHoraria + ", descricao=" + descricao + ", titulo=" + titulo + "]";
+    return "Curso [cargaHoraria=" + cargaHoraria + ", descricao=" + getDescricao() + ", titulo=" + getTitulo() + "]";
+  }
+
+  @Override
+  public double calcularXp() {
+    return XP_PADRAO * this.cargaHoraria;
   }
 
   

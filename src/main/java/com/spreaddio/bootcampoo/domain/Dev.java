@@ -1,6 +1,7 @@
 package com.spreaddio.bootcampoo.domain;
 
 import java.util.LinkedHashSet;
+import java.util.Optional;
 import java.util.Set;
 
 public class Dev {
@@ -8,6 +9,7 @@ public class Dev {
   private String nome;
   private Set<Conteudo> conteudosInscritos = new LinkedHashSet<>();
   private Set<Conteudo> conteudosConcluidos = new LinkedHashSet<>();
+  private Optional<Conteudo> findFirst;
 
   public String getNome() {
     return nome;
@@ -25,15 +27,22 @@ public class Dev {
   }
 
   public void inscreverBootcamp (Bootcamp bootcamp) {
-
+    this.conteudosInscritos.addAll(bootcamp.getConteudos());
+    bootcamp.getDevsInscritos().add(this);
   }
 
   public void progredir() {
-
+    Optional<Conteudo> findFirst = this.conteudosInscritos.stream().findFirst();
+    if (findFirst.isPresent()) {
+      this.conteudosConcluidos.add(findFirst.get());
+      this.conteudosInscritos.remove(findFirst.get());
+    } else {
+      System.err.println("O dev não está matriculado em nenhum conteúdo!");
+    }
   }
 
-  public void calcularTotalXp() {
-
+  public double calcularTotalXp() {
+    return this.conteudosConcluidos.stream().mapToDouble(conteudo -> conteudo.calcularXp()).sum();
   }
 
   @Override

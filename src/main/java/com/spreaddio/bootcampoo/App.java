@@ -1,9 +1,6 @@
 package com.spreaddio.bootcampoo;
 
-/**
- * Hello world!
- *
- */
+
 public class App 
 {
     public static void main( String[] args )
